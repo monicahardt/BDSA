@@ -45,7 +45,7 @@ public class LeapYearTests
         Console.SetOut(writer);
         
         // When
-        Year.isInputLeapYear("800");
+        Year.isInputLeapYear("2016");
         
         // Then
         var output = writer.GetStringBuilder().ToString().TrimEnd();
@@ -60,12 +60,46 @@ public class LeapYearTests
         Console.SetOut(writer);
         
         // When
-        Year.isInputLeapYear("1000");
+        Year.isInputLeapYear("1900");
         
         // Then
         var output = writer.GetStringBuilder().ToString().TrimEnd();
         output.Should().Be("nay");
     }
+
+    [Fact]
+    public void error_message_with_nonconvertible_input()
+    {
+        /// Given
+        using var writer = new StringWriter();
+        Console.SetOut(writer);
+        
+        // When
+        Year.isInputLeapYear("hej");
+        
+        // Then
+        var output = writer.GetStringBuilder().ToString().TrimEnd();
+        output.Should().Be("Please enter valid input");
+    }
+
+
+    [Fact]
+    public void error_message_with_year_less_than_1582()
+    {
+        /// Given
+        using var writer = new StringWriter();
+        Console.SetOut(writer);
+        
+        // When
+        Year.isInputLeapYear("800");
+        
+        // Then
+        var output = writer.GetStringBuilder().ToString().TrimEnd();
+        output.Should().Be("Please enter valid input");
+    }
+
+
+   
 }
 
 

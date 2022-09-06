@@ -23,11 +23,21 @@ public class Year
     }
 
     public static void isInputLeapYear(string s)  {
-        int inputYearInt = Convert.ToInt32(s);
-        if(isLeapYear(inputYearInt)){
+
+
+        try{
+            int inputYearInt = Convert.ToInt32(s);
+
+            if(inputYearInt<1582){
+                throw new FormatException("Please enter valid input");
+            }
+            if(isLeapYear(inputYearInt)){
             Console.WriteLine("yay");
         } else {
             Console.WriteLine("nay");
+        }
+        } catch (FormatException e) {
+            Console.WriteLine("Please enter valid input");
         }
     }
 }
